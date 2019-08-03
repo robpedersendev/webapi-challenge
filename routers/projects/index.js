@@ -54,6 +54,27 @@ router.get("/:id", validateProjectId, (req,res)=> {
     });
 });
 
+//This promise gets all the actions for the related project
+router.get("/:id/actions", (req, res) => {
+    //Takes the project id and grabs the actions
+    projectsdb.getProjectActions(req.params.id)
+      .then(actions => {
+        if (actions) {
+            //IF there is a value for actions, then return a HTTP 200 and return the JSON object of actions
+          res.status(200).json(actions);
+        } else {
+            //If there is not a value for action, then return a message of "No Project"
+          res.status(404).json({ message: "No project" });
+        }
+      })
+      .catch(error => {
+          //Throw an error if applicable
+        res.status(500).json({
+          message: "Error"
+        });
+      });
+  });
+
 
 //Post Call
 
@@ -118,3 +139,6 @@ router.post("/", (req, res) => {
           });
       });
   });
+
+
+  
