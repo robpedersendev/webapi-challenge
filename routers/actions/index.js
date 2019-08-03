@@ -11,6 +11,7 @@ const projectsdb = require("../data/helpers/projectModel");
 
 //Begin CRUD functionality
 
+//GET Calls
 
 router.get("/", (req,res)=> {
     //Tells us where we are in the console
