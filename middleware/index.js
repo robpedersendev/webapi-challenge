@@ -30,7 +30,9 @@ function validateProjectId(req, res, next) {
 
 
   function validateActionId(req, res, next) {
+      //Assigns the ID variable to the id value of the req.params.id value
     const id = req.params.id;
+    //This promise validates the id of an action to make sure an action with the specified ID actually exists
     actionsdb
       .get(id)
       .then(action => {
@@ -48,21 +50,3 @@ function validateProjectId(req, res, next) {
       });
   }
   
-  function validateProjectId(req, res, next) {
-    const id = req.params.id;
-    projectsdb
-      .get(id)
-      .then(project => {
-        if (project) {
-          req.project = project;
-          next();
-        } else {
-          res.status(400).json({ message: "Invalid Project ID" });
-        }
-      })
-      .catch(error => {
-        res
-          .status(500)
-          .json({ message: "error in the validation by id function" });
-      });
-  }
