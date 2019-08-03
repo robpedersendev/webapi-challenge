@@ -118,9 +118,31 @@ router.put("/:id", validateActionId, (req, res) => {
 
 
 
+  //DELETE api calls
 
 
-
+//This api call allows you to delete an action
+  router.delete("/:id", validateActionId, (req, res) => {
+    //Assigns id to the value of req.params.id
+    const id = req.params.id;
+    //Console.logs out the values of the above assignment
+    console.log(id);
+    //This takes in the id and passes it through the promise
+    actionsdb
+      .remove(id)
+      .then(response => {
+          //Return the HTTP status of 200 and then return a message 
+        res.status(200).json({
+          message: "action deleted"
+        });
+      })
+      .catch(error => {
+          //If there is an issue, throw an error message
+        res.status(500).json({
+          message: "another error"
+        });
+      });
+  });
 
 
 
