@@ -1,8 +1,7 @@
 //This invokes the express framework
 const express = require('express')
     //This assigns the routes in the users file in the routers folder to the variable usersRouter
-
-// const usersRouter = require('./routers/users')
+const projectsRouter = require('./routers/projects')
     //This line pulls the logger function from the middleware folder
 const { logger } = require('./middleware')
     //This sets the variable of server to the express framework
@@ -12,7 +11,7 @@ server.use(express.json())
     //This line forces all API calls to use the middleware function "logger"
 server.use(logger)
     //This line tells the server that all routes in the routers/users will be AFTER the users switch 
-server.use('/api/users', usersRouter)
+server.use('/api/projects', projectsRouter)
     //This line tells the server what is the landing page 
 server.get('/', (req, res) => {
         res.send(`<h2>Welcome to Web API Sprint Challenge</h2>`)
