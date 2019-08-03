@@ -7,7 +7,9 @@ const actionsdb = require('../../data/helpers/actionModel');
 //This imports the projects db
 const projectsdb = require('../../data/helpers/projectModel');
 //This imports validateProjectId function from the middleware file
-const {validateProjectId, validateActionId} = require('../../middleware/index')
+const { validateActionId} = require('../../middleware')
+
+
 
 //Crud functionality
 
@@ -141,5 +143,23 @@ router.post("/", (req, res) => {
       });
   });
 
+
+  
+  function validateProjectId(req, res, next) {
+    const id = req.params.id;
+    projectsdb
+      .get(id)
+      .then(project => {
+        if (project) {
+          req.project = project;
+          next();
+        } else {
+          res.status(400).json({ message: "Invalid Project ID" });
+        }
+      })
+      .catch(error => {
+        res.status(500).json( {message: "error in the validation by id function"});
+      });
+  }
 
   module.exports = router;

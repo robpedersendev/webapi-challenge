@@ -5,7 +5,7 @@ const actionsdb = require("../data/helpers/actionModel");
 //This imports the projects db
 const projectsdb = require("../data/helpers/projectModel");
 
-function validateProjectId(req, res, next) {
+const validateProjectId = (req, res, next) =>{
     //Assigns the ID variable to the id value of the req.params.id value
     const id = req.params.id;
     //This promise validates the id of a project ot make sure a project with the specified ID actually exists
@@ -29,7 +29,7 @@ function validateProjectId(req, res, next) {
   }
 
 
-  function validateActionId(req, res, next) {
+  const validateActionId = (req, res, next)=> {
       //Assigns the ID variable to the id value of the req.params.id value
     const id = req.params.id;
     //This promise validates the id of an action to make sure an action with the specified ID actually exists
@@ -50,3 +50,8 @@ function validateProjectId(req, res, next) {
       });
   }
   
+
+  module.exports = {
+    validateActionId,
+    validateProjectId
+}

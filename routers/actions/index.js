@@ -7,7 +7,7 @@ const router = require('express').Router()
 //This imports the actions db
 const actionsdb = require('../../data/helpers/actionModel');
 //This imports validateProjectId function from the middleware file
-const {validateProjectId, validateActionId} = require('../../middleware/index')
+const {validateProjectId, validateActionId} = require('../../middleware')
 
 //Begin CRUD functionality
 
@@ -141,4 +141,6 @@ router.put("/:id", validateActionId, (req, res) => {
       });
   });
 
+
+  
 module.exports = router;
