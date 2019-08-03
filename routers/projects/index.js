@@ -53,3 +53,19 @@ router.get("/:id", validateProjectId, (req,res)=> {
         res.status(500).json({err, message: "Unable to retrieve project"});
     });
 });
+
+
+//Post Call
+//This promise allows data to be added to the Db
+router.post("/", (req, res) => {
+    //this inserts the body object on the req object into the DB
+    projectsdb.insert(req.body)
+      .then(project => {
+          //Returns a 201 and the newly added object if successful
+        res.status(201).json(project);
+      })
+      .catch(error => {
+          //This throws an error message if unsuccessful
+        res.status(500).json({ error, message: "Error adding the project!" });
+      });
+  });
