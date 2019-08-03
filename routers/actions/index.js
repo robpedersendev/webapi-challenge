@@ -57,6 +57,30 @@ router.get("/:id", (req,res)=> {
 });
 
 
+//POST api calls
+
+//This call allows us to add data to the Db
+router.post("/", validateProjectId, (req, res) => {
+    //This object takes the values sent to the sever and assigns them in a key/value pair 
+    const newAction = {
+      project_id: req.body.project_id,
+      description: req.body.description,
+      notes: req.body.notes
+    };
+    //This promise takes the object object and passes it into through itself
+    actionsdb
+      .insert(newAction /* This inserts the object into the Db */)
+      .then(response => {
+        //This passes the response from the insert method and returns a HTTP 200 message a JSON response message
+        res.status(201).json(response);
+      })
+      .catch(error => {
+          //If needed, throw an error message
+        res
+          .status(500)
+          .json({ message: "error occured when trying to add an action" });
+      });
+  });
 
 
 module.exports = router;
