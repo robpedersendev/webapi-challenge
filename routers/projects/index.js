@@ -94,3 +94,27 @@ router.post("/", (req, res) => {
           });
       });
   });
+
+  //DELETE call
+
+  //This promise allows an object to be deleted from the Db
+  router.delete("/:id", validateProjectId, (req, res)=> {
+    const id = req.params.id;
+    //Prints out the id value
+    console.log(id);
+    //Takes the id value and passes it into the promise below
+      projectsdb
+      .remove(id)
+      .then(response => {
+          //Returns a 200 and the message confirming that it was successfully deleted
+          res.status(200).json({
+              message: "project deleted"
+          });
+      })
+      .catch(error => {
+           //This throws an error message if applicable
+            res.status(500).json({
+              message: "another error"
+          });
+      });
+  });
