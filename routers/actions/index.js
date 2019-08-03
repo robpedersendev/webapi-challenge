@@ -9,10 +9,52 @@ const projectsdb = require("../data/helpers/projectModel");
 //This imports validateProjectId function from the middleware file
 // const {validateProjectId} = require('../../middleware/index')
 
+//Begin CRUD functionality
 
 
+router.get("/", (req,res)=> {
+    //Tells us where we are in the console
+    console.log("inside the get at root actions")
+    //Performs the get function for all items
+    actionsdb.get()
+    .then(actions => {
+        //Since this is a promise, we can use .then to chain several actions together
+        //This line returns the HTTP status of 200 and the actions as a JSON object
+        res.status(200).json(actions);
+    })
+    .catch(err => {
+        //This line throws an error message if applicable
+        res.status(500).json({ error: "Unable to retrieve actions" });
+    });
+});
 
 
+router.get("/:id", (req,res)=> {
+    //Tells us where we are in the console
+    console.log("inside the get by ID actions")
+    //Assigns the variable id to the id on the params list
+    const id = req.params.id;
+    //Prints out the id value
+    console.log(id);
+    //Takes the id value and passes it into the promise below
+    actionssdb.get(id)
+    .then(actions => {
+        //The if function below passes a placeholder "actions" in
+        if (actions) {
+            //If the PH actions holds a value then return a HTTP 200 and the PH actions as a JSON object
+            res.status(200).json({
+                actions
+            });
+            //If the PH actions has no value then the message below occurs
+        } else {
+            res.status(201).json({message: "sorry no actions"});
+        }
+    })
+    .catch(err => {
+        //This line throws an error message if applicable
+        res.status(500).json({err, message: "Unable to retrieve actions"});
+    });
+});
 
 
 
