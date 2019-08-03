@@ -4,8 +4,8 @@ const cors = require("cors");
 
 // import routers
 
-const actionRouter = require("./routers/actions/index")
-const projectRouter = require("./routers/projects/index")
+const actionRouter = require('../webapi-challenge/routers/actions/index')
+const projectRouter = require('../webapi-challenge/routers/projects/index')
 
 const server = express();
 

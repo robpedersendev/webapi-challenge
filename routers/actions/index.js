@@ -4,10 +4,8 @@ const express = require("express");
 const router = express.Router();
 //This imports the actions db
 const actionsdb = require('../../data/helpers/actionModel');
-//This imports the projects db
-const projectsdb = require('../../data/helpers/projectModel');
 //This imports validateProjectId function from the middleware file
-// const {validateProjectId} = require('../../middleware/index')
+const {validateProjectId, validateActionId} = require('../../middleware/index')
 
 //Begin CRUD functionality
 
@@ -69,8 +67,7 @@ router.post("/", validateProjectId, (req, res) => {
       notes: req.body.notes
     };
     //This promise takes the object object and passes it into through itself
-    actionsdb
-      .insert(newAction /* This inserts the object into the Db */)
+    actionsdb.insert(newAction /* This inserts the object into the Db */)
       .then(response => {
         //This passes the response from the insert method and returns a HTTP 200 message a JSON response message
         res.status(201).json(response);
@@ -97,15 +94,14 @@ router.put("/:id", validateActionId, (req, res) => {
     console.log(changes);
     console.log(id);
   //This promise takes the two variables values above and pushes them through the update method found in the actionsDb file. The first value is the id of the action you are updating, the second value is what you want to update/change
-    actionsdb
-      .update(id, changes)
+    actionsdb.update(id, changes)
       .then(UpdateAction => {
         if (UpdateAction) {
             //If updateAction has a value then return the HTTP status of 200 and return a JSON object of updateAction
           res.status(200).json(UpdateAction);
         } else {
             //If updateAction ahs no value, throw an error message
-          res.status(404).json({ message: " project does not exist" });
+          res.status(404).json({ message: " Action does not exist" });
         }
       })
       .catch(error => {
@@ -128,8 +124,7 @@ router.put("/:id", validateActionId, (req, res) => {
     //Console.logs out the values of the above assignment
     console.log(id);
     //This takes in the id and passes it through the promise
-    actionsdb
-      .remove(id)
+    actionsdb.remove(id)
       .then(response => {
           //Return the HTTP status of 200 and then return a message 
         res.status(200).json({

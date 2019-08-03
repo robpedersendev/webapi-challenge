@@ -7,7 +7,7 @@ const actionsdb = require('../../data/helpers/actionModel');
 //This imports the projects db
 const projectsdb = require('../../data/helpers/projectModel');
 //This imports validateProjectId function from the middleware file
-const {validateProjectId} = require('../../middleware/index')
+const {validateProjectId, validateActionId} = require('../../middleware/index')
 
 //Crud functionality
 
