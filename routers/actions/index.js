@@ -83,4 +83,55 @@ router.post("/", validateProjectId, (req, res) => {
   });
 
 
+//PUT api Calls
+
+
+//This API call allows us to update information on the DB
+router.put("/:id", validateActionId, (req, res) => {
+    //Assigns id to the value of req.params.id
+    const id = req.params.id;
+    //Assigns the sent/updated information from req.body to changes
+    const changes = req.body;
+  //Console.logs out the values of the above assignments
+    console.log(changes);
+    console.log(id);
+  //This promise takes the two variables values above and pushes them through the update method found in the actionsDb file. The first value is the id of the action you are updating, the second value is what you want to update/change
+    actionsdb
+      .update(id, changes)
+      .then(UpdateAction => {
+        if (UpdateAction) {
+            //If updateAction has a value then return the HTTP status of 200 and return a JSON object of updateAction
+          res.status(200).json(UpdateAction);
+        } else {
+            //If updateAction ahs no value, throw an error message
+          res.status(404).json({ message: " project does not exist" });
+        }
+      })
+      .catch(error => {
+          //If needed throw an error message
+        res.status(500).json({
+          message: "another error"
+        });
+      });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;
