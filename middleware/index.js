@@ -27,3 +27,42 @@ function validateProjectId(req, res, next) {
         res.status(500).json( {message: "error in the validation by id function"});
       });
   }
+
+
+  function validateActionId(req, res, next) {
+    const id = req.params.id;
+    actionsdb
+      .get(id)
+      .then(action => {
+        if (action) {
+          req.action = action;
+          next();
+        } else {
+          res.status(400).json({ message: "Invalid Action ID" });
+        }
+      })
+      .catch(error => {
+        res
+          .status(500)
+          .json({ message: "error in the validation by id function" });
+      });
+  }
+  
+  function validateProjectId(req, res, next) {
+    const id = req.params.id;
+    projectsdb
+      .get(id)
+      .then(project => {
+        if (project) {
+          req.project = project;
+          next();
+        } else {
+          res.status(400).json({ message: "Invalid Project ID" });
+        }
+      })
+      .catch(error => {
+        res
+          .status(500)
+          .json({ message: "error in the validation by id function" });
+      });
+  }
