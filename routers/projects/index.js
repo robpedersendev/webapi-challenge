@@ -56,6 +56,7 @@ router.get("/:id", validateProjectId, (req,res)=> {
 
 
 //Post Call
+
 //This promise allows data to be added to the Db
 router.post("/", (req, res) => {
     //this inserts the body object on the req object into the DB
@@ -67,5 +68,29 @@ router.post("/", (req, res) => {
       .catch(error => {
           //This throws an error message if unsuccessful
         res.status(500).json({ error, message: "Error adding the project!" });
+      });
+  });
+
+//PUT Call
+
+///This promise allows data to be updated on the Db
+  router.put("/:id", validateProjectId, (req, res)=> {
+          //Assigns the variable id to the id on the params list
+    const id = req.params.id;
+    //Prints out the id value to the console
+    console.log(id);
+    //These next few lines will take in two values, the id of the object to update and then the values your changing which is included in the body object on the req object
+      projectsdb
+      .update(id, req.body)
+      .then(response => {
+          res.status(200).json(
+              response
+          )
+      })
+      .catch(error => {
+          //This throws an error message if applicable
+          res.status(500).json({
+              message: "another error"
+          });
       });
   });
