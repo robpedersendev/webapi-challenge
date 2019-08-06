@@ -26,13 +26,21 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+        I learned that you can send all api calls through a ***.use() method and I learned that you can have as many Middleware functions within a API call as needed
+
 - [ ] Describe Middleware?
+        Middle ware is basically adding in a callback function by using the functions name.
 
 - [ ] Describe a Resource?
 
+        Im not sure what a resoruce is unless you are referring to a 3rd party npm package such as morgan
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+        an HTTP status code and a json object
+
 - [ ] How can we partition our application into sub-applications?
+        By using a router folder
 
 ## Project Setup
 
@@ -68,8 +76,8 @@ The `projectModel.js` helper includes an extra method called `getProjectActions(
 
 ## Minimum Viable Product
 
-- [ ] Configure an _npm script_ named _"server"_ that will execute your code using _nodemon_. Make _nodemon_ be a development time dependency only, it shouldn't be deployed to production.
-- [ ] Configure an _npm script_ named _"start"_ that will execute your code using _node_.
+- [x] Configure an _npm script_ named _"server"_ that will execute your code using _nodemon_. Make _nodemon_ be a development time dependency only, it shouldn't be deployed to production.
+- [x] Configure an _npm script_ named _"start"_ that will execute your code using _node_.
 
 Design and build the necessary endpoints to:
 
