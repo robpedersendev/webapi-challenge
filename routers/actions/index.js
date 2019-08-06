@@ -38,7 +38,7 @@ router.get("/:id", (req,res)=> {
     //Prints out the id value
     console.log(id);
     //Takes the id value and passes it into the promise below
-    actionssdb.get(id)
+    actionsdb.get(id)
     .then(actions => {
         //The if function below passes a placeholder "actions" in
         if (actions) {
